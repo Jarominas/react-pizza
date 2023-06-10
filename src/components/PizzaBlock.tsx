@@ -1,18 +1,54 @@
 import { useState } from 'react'
 
-const PizzaBlock = ({ title, price, image, sizes }) => {
+const PizzaBlock = ({ pizza }) => {
+      const { id, imageUrl, title, types, sizes, price } = pizza
+      const [activeType, setActiveType] = useState(0)
+      const [activeSize, setActiveSize] = useState(0)
+
+      const typeNames = ['thin', 'traditional']
+
+      const typeChanger = (typeIndex) => {
+            setActiveType(typeIndex)
+      }
+
+      const sizeChanger = (sizeIndex) => {
+            setActiveSize(sizeIndex)
+      }
       return (
             <div className='pizza-block'>
-                  <img className='pizza-block__image' src={image} alt='Pizza' />
+                  <img
+                        className='pizza-block__image'
+                        src={imageUrl}
+                        alt='Pizza'
+                  />
                   <h4 className='pizza-block__title'>{title}</h4>
                   <div className='pizza-block__selector'>
                         <ul>
-                              <li className='active'>тонкое</li>
-                              <li>традиционное</li>
+                              {types.map((type, id) => (
+                                    <li
+                                          onClick={() => typeChanger(id)}
+                                          className={
+                                                activeType === id
+                                                      ? 'active'
+                                                      : ''
+                                          }
+                                    >
+                                          {typeNames[type]}
+                                    </li>
+                              ))}
                         </ul>
                         <ul>
-                              {sizes.map((size) => (
-                                    <li>{size} см</li>
+                              {sizes.map((size, id) => (
+                                    <li
+                                          onClick={() => sizeChanger(id)}
+                                          className={
+                                                activeSize === id
+                                                      ? 'active'
+                                                      : ''
+                                          }
+                                    >
+                                          {size} см
+                                    </li>
                               ))}
                         </ul>
                   </div>
