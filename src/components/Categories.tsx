@@ -1,13 +1,39 @@
+import * as React from 'react'
+import { useState } from 'react'
+
 const Categories = () => {
+      const [activeIndex, setActiveIndex] = useState(2)
+      const categories = [
+            'Все',
+            'Мясные',
+            'Вегетарианская',
+            'Гриль',
+            'Острые',
+            'Закрытые',
+      ]
+      const clickHandler = (index) => {
+            setActiveIndex(index)
+
+            console.log(index)
+      }
+
       return (
             <div className='categories'>
                   <ul>
-                        <li className='active'>Все</li>
-                        <li>Мясные</li>
-                        <li>Вегетарианская</li>
-                        <li>Гриль</li>
-                        <li>Острые</li>
-                        <li>Закрытые</li>
+                        {categories.map((category, id) => {
+                              return (
+                                    <li
+                                          onClick={() => clickHandler(id)}
+                                          className={
+                                                activeIndex === id
+                                                      ? 'active'
+                                                      : ''
+                                          }
+                                    >
+                                          {category}
+                                    </li>
+                              )
+                        })}
                   </ul>
             </div>
       )

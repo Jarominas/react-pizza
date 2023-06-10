@@ -1,20 +1,9 @@
 import { useState } from 'react'
 
-const PizzaBlock = ({ title, price }) => {
-      const [count, setCount] = useState(0)
-      const [pizzaPrice, setPizzaPrice] = useState(price)
-
-      const changeHandler = () => {
-            setCount(count + 1)
-            setPizzaPrice(pizzaPrice + price)
-      }
+const PizzaBlock = ({ title, price, image, sizes }) => {
       return (
             <div className='pizza-block'>
-                  <img
-                        className='pizza-block__image'
-                        src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-                        alt='Pizza'
-                  />
+                  <img className='pizza-block__image' src={image} alt='Pizza' />
                   <h4 className='pizza-block__title'>{title}</h4>
                   <div className='pizza-block__selector'>
                         <ul>
@@ -22,15 +11,13 @@ const PizzaBlock = ({ title, price }) => {
                               <li>традиционное</li>
                         </ul>
                         <ul>
-                              <li className='active'>26 см.</li>
-                              <li>30 см.</li>
-                              <li>40 см.</li>
+                              {sizes.map((size) => (
+                                    <li>{size} см</li>
+                              ))}
                         </ul>
                   </div>
                   <div className='pizza-block__bottom'>
-                        <div className='pizza-block__price'>
-                              от {pizzaPrice} ₽
-                        </div>
+                        <div className='pizza-block__price'>от {price} ₽</div>
                         <div className='button button--outline button--add'>
                               <svg
                                     width='12'
@@ -44,8 +31,8 @@ const PizzaBlock = ({ title, price }) => {
                                           fill='white'
                                     />
                               </svg>
-                              <span onClick={changeHandler}>Добавить</span>
-                              <i>{count}</i>
+                              <span>Добавить</span>
+                              <i>0</i>
                         </div>
                   </div>
             </div>
