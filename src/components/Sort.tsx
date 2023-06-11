@@ -1,4 +1,16 @@
+import { useState } from 'react'
+
 const Sort = () => {
+      const [open, setOpen] = useState(false)
+      const [selected, setSelected] = useState(0)
+
+      const sortList = ['Popular', 'By cost', 'Alphabetical']
+
+      const listChanger = (item) => {
+            setSelected(item)
+            setOpen(false)
+      }
+
       return (
             <div className='sort'>
                   <div className='sort__label'>
@@ -15,15 +27,29 @@ const Sort = () => {
                               />
                         </svg>
                         <b>Сортировка по:</b>
-                        <span>популярности</span>
+                        <span onClick={() => setOpen(!open)}>
+                              {sortList[selected]}
+                        </span>
                   </div>
-                  <div className='sort__popup'>
-                        <ul>
-                              <li className='active'>популярности</li>
-                              <li>цене</li>
-                              <li>алфавиту</li>
-                        </ul>
-                  </div>
+                  {open && (
+                        <div className='sort__popup'>
+                              <ul>
+                                    {sortList.map((list, id) => (
+                                          <li
+                                                key={id}
+                                                onClick={() => listChanger(id)}
+                                                className={
+                                                      selected === id
+                                                            ? 'active'
+                                                            : ''
+                                                }
+                                          >
+                                                {list}
+                                          </li>
+                                    ))}
+                              </ul>
+                        </div>
+                  )}
             </div>
       )
 }
