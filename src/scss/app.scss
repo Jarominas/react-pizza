@@ -58,6 +58,11 @@ body {
                         flex-direction: column;
                   }
             }
+            @media screen and (max-width: 679px) {
+                  align-items: flex-end;
+                  & {
+                  }
+            }
       }
 }
 
