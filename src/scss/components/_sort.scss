@@ -19,6 +19,12 @@
                   border-bottom: 1px dashed $orange;
                   cursor: pointer;
             }
+
+            @media screen and (max-width: 1260px) {
+                  & {
+                        margin-top: 1rem;
+                  }
+            }
       }
 
       &__popup {
