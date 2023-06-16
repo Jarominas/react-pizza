@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { useState } from 'react'
 
-const Categories = () => {
-      const [activeIndex, setActiveIndex] = useState(2)
+const Categories = ({ value, onClickCategory }) => {
       const categories = [
             'Все',
             'Мясные',
@@ -11,11 +10,11 @@ const Categories = () => {
             'Острые',
             'Закрытые',
       ]
-      const clickHandler = (index) => {
+      /* const onClickCategory = (index) => {
             setActiveIndex(index)
 
             console.log(index)
-      }
+      } */
 
       return (
             <div className='categories'>
@@ -23,11 +22,9 @@ const Categories = () => {
                         {categories.map((category, id) => {
                               return (
                                     <li
-                                          onClick={() => clickHandler(id)}
+                                          onClick={() => onClickCategory(id)}
                                           className={
-                                                activeIndex === id
-                                                      ? 'active'
-                                                      : ''
+                                                value === id ? 'active' : ''
                                           }
                                     >
                                           {category}

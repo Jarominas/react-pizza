@@ -1,13 +1,19 @@
 import { useState } from 'react'
 
-const Sort = () => {
+const Sort = ({ value, onChangeSort }) => {
       const [open, setOpen] = useState(false)
-      const [selected, setSelected] = useState(0)
 
-      const sortList = ['Popular', 'By cost', 'Alphabetical']
+      const sortList = [
+            { name: 'Popular ASC', sortProperty: 'rating' },
+            { name: 'Popular DESC', sortProperty: '-rating' },
+            { name: 'Price ASC', sortProperty: 'price' },
+            { name: 'Price DESC', sortProperty: '-price' },
+            { name: 'Alphabetical ASC', sortProperty: 'title' },
+            { name: 'Alphabetical DESC', sortProperty: '-title' },
+      ]
 
       const listChanger = (item) => {
-            setSelected(item)
+            onChangeSort(item)
             setOpen(false)
       }
 
@@ -27,24 +33,23 @@ const Sort = () => {
                               />
                         </svg>
                         <b>Сортировка по:</b>
-                        <span onClick={() => setOpen(!open)}>
-                              {sortList[selected]}
-                        </span>
+                        <span onClick={() => setOpen(!open)}>{value.name}</span>
                   </div>
                   {open && (
                         <div className='sort__popup'>
                               <ul>
-                                    {sortList.map((list, id) => (
+                                    {sortList.map((obj, id) => (
                                           <li
                                                 key={id}
-                                                onClick={() => listChanger(id)}
+                                                onClick={() => listChanger(obj)}
                                                 className={
-                                                      selected === id
+                                                      value.sortProperty ===
+                                                      obj.sortProperty
                                                             ? 'active'
                                                             : ''
                                                 }
                                           >
-                                                {list}
+                                                {obj.name}
                                           </li>
                                     ))}
                               </ul>

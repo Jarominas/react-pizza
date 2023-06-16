@@ -8,10 +8,10 @@ body {
 }
 
 .wrapper {
-      width: calc(100vw - 50px);
+      width: calc(100vw - 25px);
       height: 100%;
       background-color: #fff;
-      margin: 50px 20px 50px 20px;
+      margin: 0 auto;
       border-radius: 10px;
       max-width: 1400px;
 }
@@ -59,7 +59,7 @@ body {
                   }
             }
             @media screen and (max-width: 679px) {
-                  align-items: flex-end;
+                  align-items: flex-start;
                   & {
                   }
             }
