@@ -3,8 +3,9 @@ import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import PizzaBlock from '../components/PizzaBlock'
 import PizzaSkeleton from '../components/PizzaSkeleton/PizzaSkeleton'
+import Paginate from '../components/Paginate/Paginate'
 
-const Home = () => {
+const Home = ({ searchValue }) => {
       const [pizzas, setPizzas] = useState([])
       const [isLoading, setIsLoading] = useState(true)
       const [categoryId, setCategoryId] = useState(0)
@@ -17,10 +18,11 @@ const Home = () => {
             const sortBy = sortType.sortProperty.replace('-', '')
             const order = sortType.sortProperty.includes('-') ? 'desc' : 'asc'
             const category = categoryId > 0 ? `category=${categoryId}` : ''
+            const search = searchValue ? `&search=${searchValue}` : ''
 
             setIsLoading(true)
             const response = await fetch(
-                  `https://6486e8e2beba6297278f7688.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
+                  `https://6486e8e2beba6297278f7688.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`
             )
 
             const pizzas = await response.json()
@@ -30,7 +32,15 @@ const Home = () => {
 
       useEffect(() => {
             getPizzas()
-      }, [categoryId, sortType])
+      }, [categoryId, sortType, searchValue])
+
+      const filteredPizzas = pizzas.map((pizza) => (
+            <PizzaBlock key={pizza.id} pizza={{ ...pizza }} />
+      ))
+
+      const skeleton = [...new Array(6)].map((_, index) => (
+            <PizzaSkeleton key={index} />
+      ))
       return (
             <>
                   <div className='content__top'>
@@ -45,17 +55,9 @@ const Home = () => {
                   </div>
                   <h2 className='content__title'>All Pizzas</h2>
                   <div className='content__items'>
-                        {isLoading
-                              ? [...new Array(6)].map((_, index) => (
-                                      <PizzaSkeleton key={index} />
-                                ))
-                              : pizzas.map((pizza, id) => (
-                                      <PizzaBlock
-                                            key={id}
-                                            pizza={{ ...pizza }}
-                                      />
-                                ))}
+                        {isLoading ? skeleton : filteredPizzas}
                   </div>
+                  <Paginate />
             </>
       )
 }

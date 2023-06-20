@@ -1,1 +1,20 @@
+.root {
+      li {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
 
+            height: 40px;
+            border: 1px solid #fe5f1e;
+            border-radius: 30px;
+            a {
+                  color: black;
+            }
+      }
+      :global {
+            .selected {
+                  background-color: #fe5f1e;
+            }
+      }
+}
