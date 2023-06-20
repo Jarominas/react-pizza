@@ -13,6 +13,7 @@ const Home = ({ searchValue }) => {
             name: 'Popular',
             sortProperty: 'rating',
       })
+      const [currentPage, setCurrentPage] = useState(0)
 
       const getPizzas = async () => {
             const sortBy = sortType.sortProperty.replace('-', '')
@@ -22,7 +23,7 @@ const Home = ({ searchValue }) => {
 
             setIsLoading(true)
             const response = await fetch(
-                  `https://6486e8e2beba6297278f7688.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`
+                  `https://6486e8e2beba6297278f7688.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
             )
 
             const pizzas = await response.json()
@@ -32,7 +33,7 @@ const Home = ({ searchValue }) => {
 
       useEffect(() => {
             getPizzas()
-      }, [categoryId, sortType, searchValue])
+      }, [categoryId, sortType, searchValue, currentPage])
 
       const filteredPizzas = pizzas.map((pizza) => (
             <PizzaBlock key={pizza.id} pizza={{ ...pizza }} />
@@ -57,7 +58,7 @@ const Home = ({ searchValue }) => {
                   <div className='content__items'>
                         {isLoading ? skeleton : filteredPizzas}
                   </div>
-                  <Paginate />
+                  <Paginate onPageChange={(number) => setCurrentPage(number)} />
             </>
       )
 }

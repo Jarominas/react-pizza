@@ -3,18 +3,34 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
+            width: 30px;
 
-            height: 40px;
+            height: 30px;
             border: 1px solid #fe5f1e;
-            border-radius: 30px;
+            border-radius: 10px;
+            margin-right: 10px;
             a {
                   color: black;
+                  padding: 10px;
+            }
+
+            &:hover {
+                  background-color: #fe5f1e;
+                  cursor: pointer;
+                  a {
+                        color: #fff;
+                  }
             }
       }
       :global {
             .selected {
                   background-color: #fe5f1e;
+                  width: 37px;
+                  height: 37px;
+                  border: 1px solid black;
+                  a {
+                        color: #fff;
+                  }
             }
       }
 }

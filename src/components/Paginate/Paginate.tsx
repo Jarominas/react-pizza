@@ -5,21 +5,33 @@ import IconButton from '@mui/material/IconButton'
 import NavigateBeforeOutlinedIcon from '@mui/icons-material/NavigateBeforeOutlined'
 import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined'
 
-const Paginate = () => {
+const Paginate = ({ onPageChange }) => {
       return (
             <ReactPaginate
                   className={styles.root}
                   breakLabel='...'
                   nextLabel={
-                        <IconButton>
+                        <IconButton
+                              style={{
+                                    borderRadius: '10px',
+                                    width: '30px',
+                                    height: '30px',
+                              }}
+                        >
                               <NavigateNextOutlinedIcon />
                         </IconButton>
                   }
-                  onPageChange={(event) => console.log(event)}
+                  onPageChange={(event) => onPageChange(event.selected + 1)}
                   pageRangeDisplayed={5}
                   pageCount={3}
                   previousLabel={
-                        <IconButton>
+                        <IconButton
+                              style={{
+                                    borderRadius: '10px',
+                                    width: '30px',
+                                    height: '30px',
+                              }}
+                        >
                               <NavigateBeforeOutlinedIcon />
                         </IconButton>
                   }
