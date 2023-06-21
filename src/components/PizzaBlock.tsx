@@ -26,6 +26,7 @@ const PizzaBlock = ({ pizza }) => {
                         <ul>
                               {types.map((type, id) => (
                                     <li
+                                          key={id}
                                           onClick={() => typeChanger(id)}
                                           className={
                                                 activeType === id
@@ -40,6 +41,7 @@ const PizzaBlock = ({ pizza }) => {
                         <ul>
                               {sizes.map((size, id) => (
                                     <li
+                                          key={id}
                                           onClick={() => sizeChanger(id)}
                                           className={
                                                 activeSize === id

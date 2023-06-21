@@ -1,6 +1,3 @@
-import * as React from 'react'
-import { useState } from 'react'
-
 const Categories = ({ value, onClickCategory }) => {
       const categories = [
             'Все',
@@ -22,6 +19,7 @@ const Categories = ({ value, onClickCategory }) => {
                         {categories.map((category, id) => {
                               return (
                                     <li
+                                          key={id}
                                           onClick={() => onClickCategory(id)}
                                           className={
                                                 value === id ? 'active' : ''

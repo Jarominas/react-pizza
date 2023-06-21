@@ -10,7 +10,7 @@ export const SearchContext = createContext('')
 
 function App() {
       const [searchValue, setSearchValue] = useState('')
-      console.log(searchValue, 'Input Change')
+
       return (
             <div className='wrapper'>
                   <SearchContext.Provider
@@ -20,16 +20,7 @@ function App() {
                         <div className='content'>
                               <div className='container'>
                                     <Routes>
-                                          <Route
-                                                path='/'
-                                                element={
-                                                      <Home
-                                                            searchValue={
-                                                                  searchValue
-                                                            }
-                                                      />
-                                                }
-                                          />
+                                          <Route path='/' element={<Home />} />
                                           <Route
                                                 path='/cart'
                                                 element={<Cart />}
