@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import { useSelector } from 'react-redux'
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import PizzaBlock from '../components/PizzaBlock'
@@ -7,10 +8,14 @@ import Paginate from '../components/Paginate/Paginate'
 import { SearchContext } from '../App'
 
 const Home = () => {
+      const categoryId = useSelector((state) => state.filter.categoryId)
+      console.log(categoryId)
+
       const { searchValue } = useContext(SearchContext)
       const [pizzas, setPizzas] = useState([])
       const [isLoading, setIsLoading] = useState(true)
-      const [categoryId, setCategoryId] = useState(0)
+      // const [categoryId, setCategoryId] = useState(0)
+
       const [sortType, setSortType] = useState({
             name: 'Popular',
             sortProperty: 'rating',
