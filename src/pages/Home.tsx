@@ -9,20 +9,14 @@ import { SearchContext } from '../App'
 import { setCategoryId } from '../redux/slices/filterSlice'
 
 const Home = () => {
-      const categoryId = useSelector((state) => state.filter.categoryId)
       const dispatch = useDispatch()
-
-      console.log(categoryId)
+      const categoryId = useSelector((state) => state.filter.categoryId)
+      const sortType = useSelector((state) => state.filter.sort.sortProperty)
 
       const { searchValue } = useContext(SearchContext)
       const [pizzas, setPizzas] = useState([])
       const [isLoading, setIsLoading] = useState(true)
-      // const [categoryId, setCategoryId] = useState(0)
 
-      const [sortType, setSortType] = useState({
-            name: 'Popular',
-            sortProperty: 'rating',
-      })
       const [currentPage, setCurrentPage] = useState(1)
 
       const onClickCategory = (id) => {
@@ -31,8 +25,8 @@ const Home = () => {
       }
 
       const getPizzas = async () => {
-            const sortBy = sortType.sortProperty.replace('-', '')
-            const order = sortType.sortProperty.includes('-') ? 'desc' : 'asc'
+            const sortBy = sortType.replace('-', '')
+            const order = sortType.includes('-') ? 'desc' : 'asc'
             const category = categoryId > 0 ? `category=${categoryId}` : ''
             const search = searchValue ? `&search=${searchValue}` : ''
 
@@ -64,10 +58,7 @@ const Home = () => {
                               value={categoryId}
                               onClickCategory={onClickCategory}
                         />
-                        <Sort
-                              value={sortType}
-                              onChangeSort={(id) => setSortType(id)}
-                        />
+                        <Sort />
                   </div>
                   <h2 className='content__title'>All Pizzas</h2>
                   <div className='content__items'>
