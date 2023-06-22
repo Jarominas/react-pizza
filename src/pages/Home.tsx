@@ -1,14 +1,17 @@
 import { useState, useEffect, useContext } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import PizzaBlock from '../components/PizzaBlock'
 import PizzaSkeleton from '../components/PizzaSkeleton/PizzaSkeleton'
 import Paginate from '../components/Paginate/Paginate'
 import { SearchContext } from '../App'
+import { setCategoryId } from '../redux/slices/filterSlice'
 
 const Home = () => {
       const categoryId = useSelector((state) => state.filter.categoryId)
+      const dispatch = useDispatch()
+
       console.log(categoryId)
 
       const { searchValue } = useContext(SearchContext)
@@ -21,6 +24,11 @@ const Home = () => {
             sortProperty: 'rating',
       })
       const [currentPage, setCurrentPage] = useState(1)
+
+      const onClickCategory = (id) => {
+            console.log(id)
+            dispatch(setCategoryId(id))
+      }
 
       const getPizzas = async () => {
             const sortBy = sortType.sortProperty.replace('-', '')
@@ -54,7 +62,7 @@ const Home = () => {
                   <div className='content__top'>
                         <Categories
                               value={categoryId}
-                              onClickCategory={(id) => setCategoryId(id)}
+                              onClickCategory={onClickCategory}
                         />
                         <Sort
                               value={sortType}
