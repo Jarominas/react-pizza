@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios'
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import PizzaBlock from '../components/PizzaBlock'
@@ -31,13 +32,13 @@ const Home = () => {
             const search = searchValue ? `&search=${searchValue}` : ''
 
             setIsLoading(true)
-            const response = await fetch(
-                  `https://6486e8e2beba6297278f7688.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-            )
 
-            const pizzas = await response.json()
-            setPizzas(pizzas)
-            setIsLoading(false)
+            axios.get(
+                  `https://6486e8e2beba6297278f7688.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+            ).then((res) => {
+                  setPizzas(res.data)
+                  setIsLoading(false)
+            })
       }
 
       useEffect(() => {
