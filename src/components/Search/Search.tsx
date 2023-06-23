@@ -1,30 +1,45 @@
-import { useContext, useRef } from 'react'
+import { useContext, useRef, useCallback, useState } from 'react'
 
 import styles from './search.module.scss'
 import { FiSearch } from 'react-icons/fi'
 import { GrClose } from 'react-icons/gr'
 import { SearchContext } from '../../App'
+import { debounce } from '@mui/material'
 
 const Search = () => {
-      const { searchValue, setSearchValue } = useContext(SearchContext)
+      const [value, setValue] = useState('')
+      const { setSearchValue } = useContext(SearchContext)
       const inputRef = useRef<HTMLInputElement | null>(null)
 
       const onClickClear = () => {
             setSearchValue('')
+            setValue('')
             inputRef.current?.focus()
+      }
+
+      const updateSearchValue = useCallback(
+            debounce((str) => {
+                  setSearchValue(str)
+            }, 1000),
+            []
+      )
+
+      const onChangeInput = (event) => {
+            setValue(event.target.value)
+            updateSearchValue(event.target.value)
       }
       return (
             <div className={styles.root}>
                   <FiSearch className={styles.icon} />
                   <input
                         ref={inputRef}
-                        value={searchValue}
-                        onChange={(event) => setSearchValue(event.target.value)}
+                        value={value}
+                        onChange={onChangeInput}
                         className={styles.input}
                         type='text'
                         placeholder='Enter pizza name...'
                   />
-                  {searchValue && (
+                  {value && (
                         <GrClose
                               onClick={onClickClear}
                               className={styles.closeIcon}
