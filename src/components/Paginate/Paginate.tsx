@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton'
 import NavigateBeforeOutlinedIcon from '@mui/icons-material/NavigateBeforeOutlined'
 import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined'
 
-const Paginate = ({ onPageChange }) => {
+const Paginate = ({ currentPage, onPageChange }) => {
       return (
             <ReactPaginate
                   className={styles.root}
@@ -24,6 +24,7 @@ const Paginate = ({ onPageChange }) => {
                   onPageChange={(event) => onPageChange(event.selected + 1)}
                   pageRangeDisplayed={5}
                   pageCount={3}
+                  forcePage={currentPage - 1}
                   previousLabel={
                         <IconButton
                               style={{

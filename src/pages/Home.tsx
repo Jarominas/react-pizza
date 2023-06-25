@@ -7,22 +7,25 @@ import PizzaBlock from '../components/PizzaBlock'
 import PizzaSkeleton from '../components/PizzaSkeleton/PizzaSkeleton'
 import Paginate from '../components/Paginate/Paginate'
 import { SearchContext } from '../App'
-import { setCategoryId } from '../redux/slices/filterSlice'
+import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice'
 
 const Home = () => {
       const dispatch = useDispatch()
       const categoryId = useSelector((state) => state.filter.categoryId)
       const sortType = useSelector((state) => state.filter.sort.sortProperty)
+      const currentPage = useSelector((state) => state.filter.currentPage)
 
       const { searchValue } = useContext(SearchContext)
       const [pizzas, setPizzas] = useState([])
       const [isLoading, setIsLoading] = useState(true)
 
-      const [currentPage, setCurrentPage] = useState(1)
-
       const onClickCategory = (id) => {
             console.log(id)
             dispatch(setCategoryId(id))
+      }
+
+      const onPageChange = (number) => {
+            dispatch(setCurrentPage(number))
       }
 
       const getPizzas = async () => {
@@ -65,7 +68,10 @@ const Home = () => {
                   <div className='content__items'>
                         {isLoading ? skeleton : filteredPizzas}
                   </div>
-                  <Paginate onPageChange={(number) => setCurrentPage(number)} />
+                  <Paginate
+                        currentPage={currentPage}
+                        onPageChange={onPageChange}
+                  />
             </>
       )
 }
