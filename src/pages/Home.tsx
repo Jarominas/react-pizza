@@ -8,6 +8,7 @@ import PizzaSkeleton from '../components/PizzaSkeleton/PizzaSkeleton'
 import Paginate from '../components/Paginate/Paginate'
 import { SearchContext } from '../App'
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice'
+import RemoveAsk from '../components/RemoveAsk'
 
 const Home = () => {
       const dispatch = useDispatch()
@@ -35,13 +36,16 @@ const Home = () => {
             const search = searchValue ? `&search=${searchValue}` : ''
 
             setIsLoading(true)
-
-            axios.get(
-                  `https://6486e8e2beba6297278f7688.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-            ).then((res) => {
+            try {
+                  const res = await axios.get(
+                        `https://6486e8e2beba6297278f7688.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+                  )
                   setPizzas(res.data)
+            } catch (error) {
+                  console.log(error)
+            } finally {
                   setIsLoading(false)
-            })
+            }
       }
 
       useEffect(() => {

@@ -5,15 +5,22 @@
 
 body {
       background-color: $background;
+      padding: 50px 0;
+      @media (max-width: 768px) {
+            padding: 20px 0;
+      }
 }
 
 .wrapper {
-      width: calc(100vw - 25px);
+      width: calc(100vw - 100px);
       height: 100%;
       background-color: #fff;
       margin: 0 auto;
       border-radius: 10px;
       max-width: 1400px;
+      @media (max-width: 768px) {
+            width: calc(100% - 40px);
+      }
 }
 
 .content {
@@ -60,8 +67,6 @@ body {
             }
             @media screen and (max-width: 679px) {
                   align-items: flex-start;
-                  & {
-                  }
             }
       }
 }
@@ -315,7 +320,7 @@ body {
       }
 
       &--empty {
-            margin: 0 auto;
+            margin: 60px auto;
             width: 560px;
             text-align: center;
 
