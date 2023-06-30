@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
+import { RootState, AppDispatch } from '../redux/store'
 import Categories from '../components/Categories'
 import Sort from '../components/Sort'
 import PizzaBlock from '../components/PizzaBlock'
@@ -8,16 +8,22 @@ import PizzaSkeleton from '../components/PizzaSkeleton/PizzaSkeleton'
 import Paginate from '../components/Paginate/Paginate'
 import { SearchContext } from '../App'
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice'
-import RemoveAsk from '../components/RemoveAsk'
+import { fetchPizzas } from '../redux/slices/pizzaSlice'
 
 const Home = () => {
-      const dispatch = useDispatch()
-      const categoryId = useSelector((state) => state.filter.categoryId)
-      const sortType = useSelector((state) => state.filter.sort.sortProperty)
-      const currentPage = useSelector((state) => state.filter.currentPage)
+      const dispatch = useDispatch<AppDispatch>()
+      const categoryId = useSelector(
+            (state: RootState) => state.filter.categoryId
+      )
+      const sortType = useSelector(
+            (state: RootState) => state.filter.sort.sortProperty
+      )
+      const currentPage = useSelector(
+            (state: RootState) => state.filter.currentPage
+      )
+      const items = useSelector((state: RootState) => state.pizza.items)
 
       const { searchValue } = useContext(SearchContext)
-      const [pizzas, setPizzas] = useState([])
       const [isLoading, setIsLoading] = useState(true)
 
       const onClickCategory = (id) => {
@@ -37,10 +43,15 @@ const Home = () => {
 
             setIsLoading(true)
             try {
-                  const res = await axios.get(
-                        `https://6486e8e2beba6297278f7688.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+                  dispatch(
+                        fetchPizzas({
+                              sortBy,
+                              order,
+                              category,
+                              search,
+                              currentPage,
+                        })
                   )
-                  setPizzas(res.data)
             } catch (error) {
                   console.log(error)
             } finally {
@@ -52,7 +63,7 @@ const Home = () => {
             getPizzas()
       }, [categoryId, sortType, searchValue, currentPage])
 
-      const filteredPizzas = pizzas.map((pizza) => (
+      const filteredPizzas = items.map((pizza) => (
             <PizzaBlock key={pizza.id} pizza={{ ...pizza }} />
       ))
 
