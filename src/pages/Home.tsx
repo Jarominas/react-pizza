@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from '../redux/store'
 import Categories from '../components/Categories'
@@ -6,24 +6,20 @@ import Sort from '../components/Sort'
 import PizzaBlock from '../components/PizzaBlock'
 import PizzaSkeleton from '../components/PizzaSkeleton/PizzaSkeleton'
 import Paginate from '../components/Paginate/Paginate'
-import { SearchContext } from '../App'
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice'
 import { fetchPizzas } from '../redux/slices/pizzaSlice'
 
 const Home = () => {
       const dispatch = useDispatch<AppDispatch>()
-      const categoryId = useSelector(
-            (state: RootState) => state.filter.categoryId
+      const { categoryId, currentPage, searchValue } = useSelector(
+            (state: RootState) => state.filter
       )
+
       const sortType = useSelector(
             (state: RootState) => state.filter.sort.sortProperty
       )
-      const currentPage = useSelector(
-            (state: RootState) => state.filter.currentPage
-      )
-      const { items, status } = useSelector((state: RootState) => state.pizza)
 
-      const { searchValue } = useContext(SearchContext)
+      const { items, status } = useSelector((state: RootState) => state.pizza)
 
       const onClickCategory = (id) => {
             console.log(id)

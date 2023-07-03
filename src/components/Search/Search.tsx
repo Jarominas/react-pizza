@@ -1,25 +1,26 @@
-import { useContext, useRef, useCallback, useState } from 'react'
+import { useRef, useCallback, useState } from 'react'
 
 import styles from './search.module.scss'
 import { FiSearch } from 'react-icons/fi'
 import { GrClose } from 'react-icons/gr'
-import { SearchContext } from '../../App'
 import { debounce } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { setSearchValue } from '../../redux/slices/filterSlice'
 
 const Search = () => {
+      const dispatch = useDispatch()
       const [value, setValue] = useState('')
-      const { setSearchValue } = useContext(SearchContext)
       const inputRef = useRef<HTMLInputElement | null>(null)
 
       const onClickClear = () => {
-            setSearchValue('')
+            dispatch(setSearchValue(''))
             setValue('')
             inputRef.current?.focus()
       }
 
       const updateSearchValue = useCallback(
             debounce((str) => {
-                  setSearchValue(str)
+                  dispatch(setSearchValue(str))
             }, 1000),
             []
       )
