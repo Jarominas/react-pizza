@@ -26,6 +26,17 @@ body {
 .content {
       padding: 40px 0;
 
+      &__error-info {
+            margin: 70px auto;
+            width: 500px;
+            text-align: center;
+            h2 {
+                  font-size: 30px;
+            }
+            p {
+                  font-size: 20px;
+            }
+      }
       &__title {
             margin: 35px 0;
       }

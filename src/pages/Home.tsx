@@ -21,10 +21,9 @@ const Home = () => {
       const currentPage = useSelector(
             (state: RootState) => state.filter.currentPage
       )
-      const items = useSelector((state: RootState) => state.pizza.items)
+      const { items, status } = useSelector((state: RootState) => state.pizza)
 
       const { searchValue } = useContext(SearchContext)
-      const [isLoading, setIsLoading] = useState(true)
 
       const onClickCategory = (id) => {
             console.log(id)
@@ -41,22 +40,15 @@ const Home = () => {
             const category = categoryId > 0 ? `category=${categoryId}` : ''
             const search = searchValue ? `&search=${searchValue}` : ''
 
-            setIsLoading(true)
-            try {
-                  dispatch(
-                        fetchPizzas({
-                              sortBy,
-                              order,
-                              category,
-                              search,
-                              currentPage,
-                        })
-                  )
-            } catch (error) {
-                  console.log(error)
-            } finally {
-                  setIsLoading(false)
-            }
+            dispatch(
+                  fetchPizzas({
+                        sortBy,
+                        order,
+                        category,
+                        search,
+                        currentPage,
+                  })
+            )
       }
 
       useEffect(() => {
@@ -80,9 +72,19 @@ const Home = () => {
                         <Sort />
                   </div>
                   <h2 className='content__title'>All Pizzas</h2>
-                  <div className='content__items'>
-                        {isLoading ? skeleton : filteredPizzas}
-                  </div>
+
+                  {status == 'error' ? (
+                        <div className='content__error-info'>
+                              <h2>Error</h2>
+                              <p>Sorry, there is some issues with the server</p>
+                              <p>Please try again letter</p>
+                        </div>
+                  ) : (
+                        <div className='content__items'>
+                              {status == 'loading' ? skeleton : filteredPizzas}
+                        </div>
+                  )}
+
                   <Paginate
                         currentPage={currentPage}
                         onPageChange={onPageChange}
