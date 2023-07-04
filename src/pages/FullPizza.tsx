@@ -22,7 +22,7 @@ const FullPizza = () => {
       }, [])
 
       if (!pizza) {
-            return 'Loading...'
+            return <div className='loader'></div>
       }
       return (
             <div className='container'>

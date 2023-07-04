@@ -8,7 +8,6 @@ import PizzaSkeleton from '../components/PizzaSkeleton/PizzaSkeleton'
 import Paginate from '../components/Paginate/Paginate'
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice'
 import { fetchPizzas } from '../redux/slices/pizzaSlice'
-import { Link } from 'react-router-dom'
 
 const Home = () => {
       const dispatch = useDispatch<AppDispatch>()
