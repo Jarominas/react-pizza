@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import CartItem from '../components/CartItem'
 import CartEmpty from '../components/CartEmpty'
 import { clearItems } from '../redux/slices/cartSlice'
-import RemoveAsk from '../components/RemoveAsk'
+import { RootState } from '../redux/store'
 
 const Cart = () => {
       const dispatch = useDispatch()

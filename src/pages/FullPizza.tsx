@@ -23,7 +23,7 @@ const FullPizza: FC = () => {
                   }
             }
             fetchPizza()
-      }, [])
+      }, [id])
 
       if (!pizza) {
             return <div className='loader'></div>

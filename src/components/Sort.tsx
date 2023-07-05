@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSort } from '../redux/slices/filterSlice'
+import { RootState } from '../redux/store'
 
-const Sort = () => {
+const Sort: React.FC = () => {
       const dispatch = useDispatch()
-      const sort = useSelector((state) => state.filter.sort)
+      const sort = useSelector((state: RootState) => state.filter.sort)
       const [open, setOpen] = useState(false)
       const sortRef = useRef<HTMLDivElement>(null)
 
@@ -17,7 +18,7 @@ const Sort = () => {
             { name: 'Alphabetical DESC', sortProperty: '-title' },
       ]
 
-      const listChanger = (item) => {
+      const listChanger = (item: any) => {
             // onChangeSort(item)
             dispatch(setSort(item))
             setOpen(false)
