@@ -9,7 +9,7 @@ import Paginate from '../components/Paginate/Paginate'
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice'
 import { fetchPizzas } from '../redux/slices/pizzaSlice'
 
-const Home = () => {
+const Home: React.FC = () => {
       const dispatch = useDispatch<AppDispatch>()
       const { categoryId, currentPage, searchValue } = useSelector(
             (state: RootState) => state.filter
@@ -21,12 +21,12 @@ const Home = () => {
 
       const { items, status } = useSelector((state: RootState) => state.pizza)
 
-      const onClickCategory = (id) => {
+      const onClickCategory = (id: number) => {
             console.log(id)
             dispatch(setCategoryId(id))
       }
 
-      const onPageChange = (number) => {
+      const onPageChange = (number: number) => {
             dispatch(setCurrentPage(number))
       }
 

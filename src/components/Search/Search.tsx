@@ -7,7 +7,7 @@ import { debounce } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { setSearchValue } from '../../redux/slices/filterSlice'
 
-const Search = () => {
+const Search: React.FC = () => {
       const dispatch = useDispatch()
       const [value, setValue] = useState('')
       const inputRef = useRef<HTMLInputElement | null>(null)
@@ -25,7 +25,7 @@ const Search = () => {
             []
       )
 
-      const onChangeInput = (event) => {
+      const onChangeInput = (event: any) => {
             setValue(event.target.value)
             updateSearchValue(event.target.value)
       }

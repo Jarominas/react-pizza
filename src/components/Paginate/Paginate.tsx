@@ -5,7 +5,11 @@ import IconButton from '@mui/material/IconButton'
 import NavigateBeforeOutlinedIcon from '@mui/icons-material/NavigateBeforeOutlined'
 import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined'
 
-const Paginate = ({ currentPage, onPageChange }) => {
+type PaginateProps = {
+      currentPage: number
+      onPageChange: any
+}
+const Paginate: React.FC<PaginateProps> = ({ currentPage, onPageChange }) => {
       return (
             <ReactPaginate
                   className={styles.root}
