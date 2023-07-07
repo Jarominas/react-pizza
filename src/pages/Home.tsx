@@ -22,7 +22,6 @@ const Home: React.FC = () => {
       const { items, status } = useSelector((state: RootState) => state.pizza)
 
       const onClickCategory = (id: number) => {
-            console.log(id)
             dispatch(setCategoryId(id))
       }
 
@@ -51,7 +50,7 @@ const Home: React.FC = () => {
             getPizzas()
       }, [categoryId, sortType, searchValue, currentPage])
 
-      const filteredPizzas = items.map((pizza) => (
+      const filteredPizzas = items.map((pizza: any) => (
             <PizzaBlock key={pizza.id} pizza={{ ...pizza }} />
       ))
 

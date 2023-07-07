@@ -2,33 +2,38 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
+import { RootState } from '../redux/store'
 
 type PizzaBlockProps = {
       id: number
+
       imageUrl: string
       title: string
       types: number[]
       sizes: number[]
       price: number
-      pizza: any
 }
-const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
+
+type PizzaItem = {
+      pizza: PizzaBlockProps
+}
+const PizzaBlock: React.FC<PizzaItem> = ({ pizza }) => {
       const dispatch = useDispatch()
       const [activeType, setActiveType] = useState(0)
       const [activeSize, setActiveSize] = useState(0)
       const { id, imageUrl, title, types, sizes, price } = pizza
 
       const typeNames = ['thin', 'traditional']
-      const cartItem = useSelector((state) =>
+      const cartItem = useSelector((state: RootState) =>
             state.cart.items.find((obj) => obj.id == id)
       )
 
       const addedCount = cartItem ? cartItem.count : 0
-      const typeChanger = (typeIndex) => {
+      const typeChanger = (typeIndex: number) => {
             setActiveType(typeIndex)
       }
 
-      const sizeChanger = (sizeIndex) => {
+      const sizeChanger = (sizeIndex: number) => {
             setActiveSize(sizeIndex)
       }
 
@@ -55,7 +60,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
                   </Link>
                   <div className='pizza-block__selector'>
                         <ul>
-                              {types.map((type, id) => (
+                              {types.map((type: number, id: number) => (
                                     <li
                                           key={id}
                                           onClick={() => typeChanger(id)}
@@ -70,7 +75,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ pizza }) => {
                               ))}
                         </ul>
                         <ul>
-                              {sizes.map((size, id) => (
+                              {sizes.map((size: number, id: number) => (
                                     <li
                                           key={id}
                                           onClick={() => sizeChanger(id)}

@@ -14,7 +14,7 @@ const filterSlice = createSlice({
       name: 'filters',
       initialState,
       reducers: {
-            setCategoryId(state, action) {
+            setCategoryId(state, action): void {
                   state.categoryId = action.payload
             },
             setSearchValue(state, action) {
