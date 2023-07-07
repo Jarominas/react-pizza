@@ -7,7 +7,7 @@ import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined'
 
 type PaginateProps = {
       currentPage: number
-      onPageChange: any
+      onPageChange: (page: number) => void
 }
 const Paginate: React.FC<PaginateProps> = ({ currentPage, onPageChange }) => {
       return (
