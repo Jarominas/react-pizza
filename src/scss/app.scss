@@ -4,7 +4,6 @@
 @import './components/all';
 
 body {
-      background-color: $background;
       padding: 50px 0;
       @media (max-width: 768px) {
             padding: 20px 0;
@@ -62,6 +61,7 @@ body {
             @media screen and (max-width: 731px) {
                   & {
                         grid-template-columns: repeat(1, 1fr);
+                        place-items: center start;
                   }
             }
       }
@@ -154,7 +154,7 @@ body {
       &__item {
             display: flex;
             width: 100%;
-            border-top: 1px solid $gray-line;
+            border-top: 3px solid $gray-line;
             padding-top: 30px;
             margin-top: 30px;
 
@@ -365,6 +365,42 @@ body {
                   font-weight: 600;
                   font-size: 18px;
             }
+            @media screen and (max-width: 731px) {
+                  & {
+                        margin: 30px auto;
+                        width: 350px;
+                        h2 {
+                              font-size: 30px;
+                              margin-bottom: 10px;
+                        }
+
+                        p {
+                              font-size: 18px;
+                              line-height: 145.4%;
+                              letter-spacing: 0.01em;
+                              color: #777777;
+                        }
+
+                        icon {
+                              position: relative;
+                              top: 2px;
+                        }
+
+                        img {
+                              display: block;
+                              width: 200px;
+                              margin: 20px auto 30px;
+                        }
+
+                        .button--black {
+                              padding: 12px 0 14px;
+                              width: 180px;
+                              margin: 0 auto;
+                              font-weight: 600;
+                              font-size: 18px;
+                        }
+                  }
+            }
       }
 }
 .loader {
@@ -384,4 +420,80 @@ body {
       100% {
             transform: rotate(360deg);
       }
+}
+
+@media screen and (max-width: 731px) {
+      .cart {
+            .content__title {
+                  font-size: 24px;
+            }
+            &__clear {
+                  display: flex;
+                  align-items: center;
+                  cursor: pointer;
+                  @include noselect();
+
+                  span {
+                        display: inline-block;
+                        margin-left: 7px;
+                        color: #b6b6b6;
+                        font-size: 18px;
+                  }
+            }
+            .cart__item-info {
+                  width: 40%;
+
+                  h3 {
+                        font-size: 18px;
+                        line-height: 20px;
+                  }
+
+                  p {
+                        font-size: 16px;
+                  }
+            }
+            .cart__item-img {
+                  margin-right: 15px;
+                  width: 10%;
+
+                  img {
+                        width: 80px;
+                        height: 80px;
+                  }
+            }
+            .cart__item-price {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 33%;
+
+                  b {
+                        font-weight: bold;
+                        font-size: 20px;
+                        letter-spacing: 0.01em;
+                  }
+            }
+            .cart__item-count {
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                  justify-content: space-between;
+                  width: 16%;
+            }
+      }
+}
+
+.cart__item {
+      display: flex;
+      flex-direction: column;
+}
+.cart-item-left {
+      display: flex;
+      justify-content: left;
+      gap: 30px;
+      margin-bottom: 20px;
+}
+.cart-item-right {
+      display: flex;
+      justify-content: space-between;
 }
