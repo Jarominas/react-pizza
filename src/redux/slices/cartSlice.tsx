@@ -13,8 +13,8 @@ export type CartItem = {
 }
 
 interface CartSliceState {
-      totalPrice: number
       items: CartItem[]
+      totalPrice: number
 }
 
 const initialState: CartSliceState = getDataFromLS()
@@ -40,7 +40,7 @@ const cartSlice = createSlice({
                   state.totalPrice = calcTotalSum(state.items)
             },
 
-            minusItem(state, action: PayloadAction<string>) {
+            minusItem(state, action) {
                   const findItem = state.items.find(
                         (obj) => obj.id == action.payload.id
                   )
@@ -54,7 +54,7 @@ const cartSlice = createSlice({
                   state.totalPrice = calcTotalSum(state.items)
             },
 
-            removeItem(state, action: PayloadAction<string>) {
+            removeItem(state, action) {
                   state.items = state.items.filter(
                         (item) => item.id !== action.payload
                   )

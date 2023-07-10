@@ -6,7 +6,7 @@ import { RootState } from '../redux/store'
 
 type PizzaBlockProps = {
       id: number
-
+      count: number
       imageUrl: string
       title: string
       types: number[]
@@ -21,7 +21,7 @@ const PizzaBlock: React.FC<PizzaItem> = ({ pizza }) => {
       const dispatch = useDispatch()
       const [activeType, setActiveType] = useState(0)
       const [activeSize, setActiveSize] = useState(0)
-      const { id, imageUrl, title, types, sizes, price } = pizza
+      const { id, imageUrl, title, types, count, sizes, price } = pizza
 
       const typeNames = ['thin', 'traditional']
       const cartItem = useSelector((state: RootState) =>
@@ -43,6 +43,7 @@ const PizzaBlock: React.FC<PizzaItem> = ({ pizza }) => {
                   title,
                   price,
                   imageUrl,
+                  count,
                   type: typeNames[activeType],
                   size: sizes[activeSize],
             }
