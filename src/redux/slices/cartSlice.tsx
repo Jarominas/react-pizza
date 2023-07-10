@@ -1,6 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getDataFromLS } from '../../utils/getDataFromLS'
+import { calcTotalSum } from '../../utils/calcTotalSum'
 
-type CartItem = {
+export type CartItem = {
       id: number
       imageUrl: string
       price: number
@@ -14,20 +16,16 @@ interface CartSliceState {
       totalPrice: number
       items: CartItem[]
 }
-const initialState: CartSliceState = {
-      totalPrice: 0,
-      items: [],
-}
+
+const initialState: CartSliceState = getDataFromLS()
 
 const cartSlice = createSlice({
       name: 'cart',
       initialState,
       reducers: {
-            addItem(state, action) {
-                  //   state.items.push(action.payload)
-
+            addItem(state, action: PayloadAction<CartItem>) {
                   const findItem = state.items.find(
-                        (obj) => obj.id == action.payload.id
+                        (obj) => obj.id === action.payload.id
                   )
 
                   if (findItem) {
@@ -38,12 +36,11 @@ const cartSlice = createSlice({
                               count: 1,
                         })
                   }
-                  state.totalPrice = state.items.reduce((sum, obj) => {
-                        return obj.price * obj.count + sum
-                  }, 0)
+
+                  state.totalPrice = calcTotalSum(state.items)
             },
 
-            minusItem(state, action) {
+            minusItem(state, action: PayloadAction<string>) {
                   const findItem = state.items.find(
                         (obj) => obj.id == action.payload.id
                   )
@@ -54,12 +51,14 @@ const cartSlice = createSlice({
                               findItem.count = 0
                         }
                   }
+                  state.totalPrice = calcTotalSum(state.items)
             },
 
-            removeItem(state, action) {
+            removeItem(state, action: PayloadAction<string>) {
                   state.items = state.items.filter(
                         (item) => item.id !== action.payload
                   )
+                  state.totalPrice = calcTotalSum(state.items)
             },
             clearItems(state) {
                   state.items = []
