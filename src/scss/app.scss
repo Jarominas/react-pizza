@@ -287,7 +287,7 @@ body {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        width: 210px;
+                        width: 180px;
 
                         border-color: darken($color: $gray-line, $amount: 10);
 
@@ -322,9 +322,12 @@ body {
                   }
 
                   .pay-btn {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         font-size: 16px;
                         font-weight: 600;
-                        width: 210px;
+                        width: 180px;
                         padding: 16px;
                   }
             }
@@ -479,6 +482,12 @@ body {
                   gap: 10px;
                   justify-content: space-between;
                   width: 16%;
+            }
+            .cart__bottom-details span {
+                  font-size: 16px;
+                  & b {
+                        font-size: 20px;
+                  }
             }
       }
 }
