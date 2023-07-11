@@ -45,7 +45,7 @@ const CartItem: React.FC<CartItemProps> = ({
                         <div className='cart__item-info'>
                               <h3>{title}</h3>
                               <p>
-                                    {type}, {size} см.
+                                    {type}, {size} sm.
                               </p>
                         </div>
                   </div>
@@ -96,7 +96,7 @@ const CartItem: React.FC<CartItemProps> = ({
                               </div>
                         </div>
                         <div className='cart__item-price'>
-                              <b>{count * price} ₽</b>
+                              <b>{count * price} €</b>
                         </div>
                         <div className='cart__item-remove'>
                               <div

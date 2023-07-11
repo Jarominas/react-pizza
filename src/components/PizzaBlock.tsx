@@ -87,14 +87,14 @@ const PizzaBlock: React.FC<PizzaItem> = ({ pizza }) => {
                                                             : ''
                                                 }
                                           >
-                                                {size} см
+                                                {size} sm
                                           </li>
                                     ))}
                               </ul>
                         </div>
                         <div className='pizza-block__bottom'>
                               <div className='pizza-block__price'>
-                                    от {price} ₽
+                                    from {price} €
                               </div>
                               <button
                                     onClick={onClickAdd}
@@ -112,7 +112,7 @@ const PizzaBlock: React.FC<PizzaItem> = ({ pizza }) => {
                                                 fill='white'
                                           />
                                     </svg>
-                                    <span>Добавить</span>
+                                    <span>Add</span>
                                     {addedCount > 0 && <i>{addedCount}</i>}
                               </button>
                         </div>

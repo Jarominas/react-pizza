@@ -5,12 +5,12 @@ type CategoriesProps = {
 
 const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
       const categories = [
-            'Все',
-            'Мясные',
-            'Вегетарианская',
-            'Гриль',
-            'Острые',
-            'Закрытые',
+            'All',
+            'Meat',
+            'Vegan',
+            'Grill',
+            'Hot Chilli',
+            'Closed',
       ]
       /* const onClickCategory = (index) => {
             setActiveIndex(index)
